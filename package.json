@@ -1,0 +1,19 @@
+{
+  "name": "node-cli-global",
+  "version": "0.0.1",
+  "description": "Testing a node based global command line script",
+  "main": "app.js",
+  "scripts": {
+    "test": "works!"
+  },
+  "author": "ar-to",
+  "license": "ISC",
+  "bin": {
+    "nlc": "./app.js"
+  },
+  "dependencies": {
+    "less": "^2.7.2",
+    "shelljs": "^0.7.8",
+    "vorpal": "^1.12.0"
+  }
+}
