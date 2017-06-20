@@ -3,8 +3,7 @@ const path = require('path'),
   fs = require('fs'),
   cmds = require('./lib/vorpal'),
   dir = require('./lib/directories'),
-  file = require('./lib/new_file');
-  //command = require('./lib/commands');
+  file = require('./lib/create_file');
 
 
 
