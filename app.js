@@ -28,13 +28,6 @@ vorpal
     if (args.filename) {
       readLessFile(args.filename, args.dir);
     }
-    // if(args.dir && args.filename) {
-    //   readFile(args.filename, args.dir);//reads cwd + file.less then compiles
-    //   //createFile.create(args.file,args.content)//creates filename.css; callback from readFileandCompile
-    // } else if (args.dir == undefined ) {
-    //   readFile(args.filename);
-    // }
-
     if(args.options.currentDir) {
       readAndCompileToCss(args.filename, args.dir);
     }
@@ -43,41 +36,13 @@ vorpal
   })
 
 function readAndCompileToCss(file, dir) {
-  readCss(file, dir, function readCssCb(err, dataString) {
+  readLessFile(file, dir, function (err, dataString) {
     if (err) return console.log(err);
-
-    compileCss(dataString, function (err, dataCss) {
-      printToFile(dataCss);
-    });
-
-  cb1Test(null, file + dir);
-
-
-
-  // if (typeof cb1 && cb2 && cb3 === 'function'){
-  //   cb1(null, file + dir);
-  //   // cb2Test();
-  //   // cb3Test();
-  // }
-
-  // cb1Test(null, file + dir);
-  //return console.log('main function works')
-  });
+    //console.log(dataString);
+    compileCss(dataString);
+  });//end readLessFile
 }
 
-function readCss(file, dir, cb) {
-  if (!file) return cb('give me a file');
-  if (!dir) return cb('no dir');
-
-  let dataString = "cb1test Output";
-
-  cb(null, dataString);
+function compileCss(para) {
+  return console.log(`${para} is the data from first function`);
 }
-
-  //   function cb2Test(err,dirr, cb) {
-  //   console.log('cb2 works' + drr);
-  // }
-
-  //   function cb3Test(err, dir) {
-  //   console.log('cb1 works' + file + dir);
-  // }
