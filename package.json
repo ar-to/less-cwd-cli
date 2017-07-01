@@ -1,7 +1,7 @@
 {
-  "name": "node-cli-global",
-  "version": "0.0.1",
-  "description": "Testing a node based global command line script",
+  "name": "less-cwd-cli",
+  "version": "0.1.0",
+  "description": "A node based global command line script to compile less files into css from current working directory",
   "main": "app.js",
   "scripts": {
     "test": "works!"
@@ -9,10 +9,11 @@
   "author": "ar-to",
   "license": "ISC",
   "bin": {
-    "nlc": "./app.js"
+    "lcc": "./app.js"
   },
   "dependencies": {
     "less": "^2.7.2",
+    "less-plugin-autoprefix": "^1.5.1",
     "shelljs": "^0.7.8",
     "vorpal": "^1.12.0"
   }
