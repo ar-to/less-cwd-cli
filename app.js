@@ -3,46 +3,37 @@ const path = require('path'),
   fs = require('fs'),
   vorpal = require('vorpal')(),
   readLessFile = require('./lib/read_file'),
-  // cmds = require('./lib/vorpal'),
-  // dir = require('./lib/directories'),
   lessCompile = require('./lib/compile_less').compile,
   createFile = require('./lib/create_file').createFile;
 
-
-
-//console.log(cmds.test, file.test, dir.test);//vorpal loads! new file loaded! directories loaded!
-console.log('' + process.cwd());///Users/ari/repos/node-less-cli
-console.log(process.cwd(__filename) + '/*.less');///Users/ari/repos/node-less-cli/*.less
-
-
+console.log('Please choose a fileName with extension [.less] to compile. Use help command for possible commands.');
 
 vorpal
-  .delimiter('ncg$')
+  .delimiter('lcc$')
   .show();
 
-
 vorpal
-  .command('less [filename] [dir]', 'Choose directory & filename.less to compile. Detaults to cwd')
-  .option('-c --currentDir', 'Create a new file')
+  .command('less [filename] [sourceDir] [cssFileName]', 'Choose directory & filename.less to compile. Detaults to cwd')
+  .option('-d --default', 'Uses default values [lessMain, ./ , cssMain]')
   .action(function(args, cb) {
     if (args.filename) {
-      readLessFile(args.filename, args.dir);
+      readAndCompileToCss(args.filename, args.sourceDir, args.cssFileName);
     }
-    if(args.options.currentDir) {
-      readAndCompileToCss(args.filename, args.dir);
+    if (args.options.default) {
+      readAndCompileToCss(args.filename, args.sourceDir, args.cssFileName);
     }
 
     cb();
   })
 
-function readAndCompileToCss(file, dir) {
-  readLessFile(file, dir, function (err, dataString) {
-    if (err) return console.log(err);
-    //console.log(dataString);
-    compileCss(dataString);
-  });//end readLessFile
-}
+function readAndCompileToCss(lessFileLess, sourceDir, cssFileName) {
+    readLessFile(lessFileLess, sourceDir, function (err, dataString) {
+      if (err) return console.log(err.message);
+        //console.log(`This is your file content: ${dataString}`);
 
-function compileCss(para) {
-  return console.log(`${para} is the data from first function`);
-}
+      lessCompile(dataString, function(err, cssData) {
+          //console.log('this is the css data as string:' + ' ' + cssData.toString());
+        createFile(cssFileName, cssData);
+      });//end lessCompile
+    });//end readLessFile
+}//end readAndCompileToCss

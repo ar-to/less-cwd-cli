@@ -1,47 +1,63 @@
-* Node CLI for Less
+# Node CLI for Less
 
-*** Less compiler that runs globally via npm
+Simple Less compiler for your current working directory that runs globally
 
-***** List of tasks for development
+## Installation:
 
-- Allow script to run globally - used vorpal and link or use process.argv & switch/case
-- Create the following commands: ncg$ <args> [options]
-  - -c - current directory
-  - -f - choose file extension to compile or default to .less
-  - -l - compile .less
-- These are the following tasks this script will run
-  - read directory from argument or default to cwd
-  - read directory files and choose .less file (e.g. main.less or custom.less, etc) to compile
-  - read .less file and run it through compiler and autoprefixer
-  - write a new file into chosen directory or default to cwd
+clone repo and move into the folder
+```
+$ git clone https://github.com/ar-to/node-less-cli.git
+$ cd node-less-cli
+```
+Install module globally
+```
+$ npm i -g 
+```
 
-***** Here is how the commands may run
+## Usage
 
-node app.js arg1 option1 ..
+Move into any directory and run `lcc` to start command prompt
+```
+$ lcc
+Please choose a fileName with extension [.less] to compile. Use help command for possible commands.
+lcc$ less main
+```
+This compiles and creates a new css file inside the current working directory form the source file main.less.
 
-This runs locally. Once linked or installed globally
+#### Commands
 
-$ ncg
-ncg$ arg1 option1 ...
+Available commands:
+```
+lcc$ help
 
-Using vorpal to create a delimitter or
+  Commands:
 
-$ ncg arg1 option1 ... 
+    help [command...]                                    Provides help for a given command.
+    exit                                                 Exits application.
+    less [options] [filename] [sourceDir] [cssFileName]  Choose directory & filename.less to compile. Detaults to cwd
 
-Args and options are as follows. To run all from a single command
+lcc$ 
+```
+Available options
+```
+lcc$ less --help
 
-$ ncg inputFilename directory outputFilename
+  Usage: less [options] [filename] [sourceDir] [cssFileName]
 
-example:
+  Choose directory & filename.less to compile. Detaults to cwd
 
-$ ncg main ~/lessFiles/ main
+  Options:
 
-Using options:
+    --help        output usage information
+    -d --default  Uses default values [lessMain, ./ , cssMain]
 
-$ ncg main
+lcc$ 
+```
+Default values as of version 0.1.0 are **[lessMain, ./ , cssMain]**
 
-Run current directory with main.less and main.css. Defaults are main for less and css files and cwd fir directory. Or
+## Future Features
 
-4 ncg -d ~/../main
+* Add watch functionality for current working directory 
+* Add command argument to specify output css file directory other than  current working directory
+* Add config.json option for changing default values when running `lcc$ less -d`
 
-Will output the same 
